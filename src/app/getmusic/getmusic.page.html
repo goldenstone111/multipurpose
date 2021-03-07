@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>getmusic</ion-title>
+    <ion-button slot="end" (click)="close()" fill="clear">
+      <ion-icon name="close" style="color: #44A08D;font-size: 30px;"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let mp3 of fileList;let i = index"> 
+      <ion-avatar slot="start" *ngIf="!mp3.isPlay" (click)="audioplay(mp3,0,i)" >
+        <ion-icon name="play" style="font-size: 25px; padding: 7px;"></ion-icon>
+      </ion-avatar>
+      <ion-avatar slot="start"  *ngIf="mp3.isPlay" (click)="audioplay(mp3,1,i)">
+        <ion-icon name="pause" style="font-size: 25px; padding: 7px;"></ion-icon>
+      </ion-avatar>
+      <ion-label>{{mp3.name}}</ion-label>
+      <span slot="end">
+        <ion-checkbox [(ngModel)]="mp3.isSelected" (click)="selectMusic(mp3)"></ion-checkbox>
+      </span>
+    </ion-item>
+    <ion-grid fixed *ngIf="fileList.length==0">
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <p style="margin-top: 150px">  {{nodata}} </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading featured posts...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

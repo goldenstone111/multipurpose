@@ -1,0 +1,106 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content no-border>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" >{{title}}</ion-title>
+  </ion-toolbar>
+  <ion-grid fixed>
+    <ion-radio-group >
+    <ion-row style="margin-top: 50px;">
+      <!-- <ion-radio-group > -->
+      <ion-col size="6" class="ion-text-center ion-activatable">
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        <div>
+          <img *ngIf="!ishighlightB" src="../../assets/cloth/boy.png" alt="">
+          <img *ngIf="ishighlightB" src="../../assets/cloth/boyh.png" alt="">
+        </div>
+        <div>
+            <ion-radio mode="md" value="boy" (click)="selectGender(0)" color="secondary"></ion-radio> Boy
+        </div>
+          <!-- <ion-radio  value="boy">  </ion-radio> Boy -->
+      </ion-col>
+      <ion-col size="6" class="ion-text-center ion-activatable">
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        <div>
+          <img *ngIf="!ishighlightG" src="../../assets/cloth/girl.png" alt="">
+          <img *ngIf="ishighlightG" src="../../assets/cloth/girlh.png" alt="">
+        </div>
+        <div>
+            <ion-radio mode="md" value="girl" color="secondary" (click)="selectGender(1)"></ion-radio> Girl
+        </div>
+          <!-- <ion-radio value="girl"> </ion-radio> Girl -->
+      </ion-col>
+      <!-- </ion-radio-group> -->
+    </ion-row>
+    </ion-radio-group>
+      <ion-row *ngIf="status==1" style="margin-top: 20px;" > 
+        <ion-col size="12" *ngIf="category?.upperwear.length>0"><h3> Select Upperwear</h3>
+          <ion-slides mode="md" pager="md" [options]="slideOpts" >
+            <ion-slide *ngFor="let upper of category?.upperwear; let i = index" class="ion-activatable"  (click)="selectWear(0, i, upper)">
+              
+              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+              <div [ngStyle]="{'border':upper.isSelected?'2px solid #45a08d':'none','padding':upper.isSelected?'2px':'0px'}">
+                <img  src="{{upper.image}}" alt="">
+              </div>
+              <p>{{upper.name}}</p>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+        <ion-col size="12" *ngIf="category?.lowerwear.length>0"><h3> Select Lowerwear</h3>
+          <ion-slides mode="ios" pager="ios"   [options]="slideOpts" >
+            <ion-slide *ngFor="let lower of category?.lowerwear; let i = index;" class="ion-activatable"  (click)="selectWear(1, i,lower)">
+              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+              <div [ngStyle]="{'border':lower.isSelected?'2px solid #45a08d':'none', 'padding':lower.isSelected?'2px':'0px'}">
+                <img  src="{{lower.image}}" alt="">
+              </div>
+              <p>{{lower.name}}</p>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="status==-1" style="margin-top: 20px;">
+        <ion-col size="12" class="ion-text-center" >
+         <h3  class="nocloth">
+           Sorry No Cloths For This Category!
+         </h3>
+         <div class="sadface">
+          <img src="../../assets/cloth/nodata.png" alt="">
+         </div>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row *ngIf="gender=='girl'" style="margin-top: 50px;">
+        <ion-col size="6" class="ion-text-center">
+          <div>
+           <img src="../../assets/cloth/tshirt.png" alt="">
+          </div>
+          <div>
+            <ion-checkbox mode="md"  value="tshirt" (ionChange)="selectcloth(2,'t',$event)" color="secondary">  </ion-checkbox>  Top
+          </div>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center">
+          <div>
+            <img  src="../../assets/cloth/pant.png" alt="">
+          </div>
+          <div>
+            <ion-checkbox mode="md" value="pants" (ionChange)="selectcloth(2,'s', $event)" color="secondary">  </ion-checkbox> Skirt
+          </div>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="clothSelected">
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="8" offset="2">
+          <ion-button (click)="Next()" class="ion-activatable"  expand="block" >
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+             Next
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

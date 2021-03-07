@@ -1,0 +1,19 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>video3</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content padding>
+  {{videoPath}}
+  <button ion-button color="danger" outline (tap)="record()">Record</button>
+   
+  <!-- <video id="videoplayer" poster="" class="video-js vjs-default-skin vjs-big-play-centered" controls
+      style="width:100%;height:200px">
+      <source [src]="videoEntryPath" type="video/mp4">
+    </video> -->
+  
+   <video #myvideo controls webkit-playsinline width="300" height="200"></video>
+
+
+</ion-content>

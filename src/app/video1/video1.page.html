@@ -1,0 +1,64 @@
+
+<ion-content *ngIf="!isVideoPlaying">
+    <div class="btn1" routerLink="/home">
+        <img src="../../assets/video/close.png" alt="">
+    </div>
+    <div class="btn2" *ngIf="!selectedAudio && !recordingVideo" (click)="getMusic()">
+        <img src="../../assets/video/music.png" alt="">
+    </div>
+    <div class="btn2" *ngIf="selectedAudio && !recordingVideo" (click)="getMusic()" style="background:#44A08D">
+        <img src="../../assets/video/music.png" alt="">
+    </div>
+    <div class="btn3">
+        <img src="../../assets/video/correct.png" alt="">
+    </div>
+    <div class="btn4" (click)="switchCamera()">
+        <img src="../../assets/video/photo-camera.png" alt="">
+    </div>
+    <div class="btn5" (click)="changeFlashMode()">
+        <img src="../../assets/video/thunder.png" alt="">
+    </div>
+    <div class="btn6" (click)="customtimer()">
+        <img src="../../assets/video/effect.png" alt="">
+    </div>
+    <div class="btn7" (click)="openGallery()">
+        <img src="../../assets/video/photo.png" alt="">
+    </div>
+    <p class="btn9" *ngIf="!iscustime && !recordingVideo"> <span (click)="settimer('60')" [ngStyle]="{opacity: recordTimer==60? 1 : 0.5}">60s</span> &nbsp;&nbsp; <span (click)="settimer('30')" [ngStyle]="{opacity: recordTimer==30? 1 : 0.5}">30s</span> &nbsp;&nbsp; <span (click)="settimer('15')" [ngStyle]="{opacity: recordTimer==15? 1 : 0.5}">15s</span></p>
+    <p class="btn9" *ngIf="iscustime"> <span>{{recordTimer}}s</span> </p>
+    <p class="btn9" *ngIf="!iscustime && recordingVideo"> <span>{{recordTimer}}s</span> </p>
+    <div class="btn8" (click)="takeMedia()" *ngIf="!recordingVideo">
+        <img src="../../assets/video/Group 14.png" alt="">
+    </div>
+    <div class="btn8" (click)="takeMedia()" *ngIf="recordingVideo">
+        <img style="padding: 20px;" src="../../assets/video/Group 14.png" alt="">
+    </div>
+
+    <div class="btn10" *ngIf="customtime">
+        <ion-range
+            min="0" max="{{recordTimer}}"
+            pin="true"
+            step="1"
+            ticks="true" value="{{recordTimer}}"
+            color="primary"
+            #rangebar
+           >
+        </ion-range>
+        <ion-button (click)="recordTimerrangeChange(rangebar.value)" expand="block"  >
+            Start shooting
+        </ion-button>
+    </div>
+</ion-content>
+<ion-content padding  *ngIf="isVideoPlaying">
+
+    
+    <div class="fullscreen-player">
+        <img [src]="previewFile" *ngIf="mediaType == 'image'">
+
+        <video #previewVideo loop width="100%" height="100%" (loadeddata)="videoDataLoaded()"  controls="controls" poster="data:image/gif,AAAA" *ngIf="videoHasData" >
+          <source [src]="previewFile" type="video/mp4">
+        </video>
+    
+        <!-- <video [src]="previewFile" class="centerme" #previewVideo  loop width="100%" height="100%" controls="controls" (loadeddata)="videoDataLoaded()" poster="data:image/gif,AAAA" *ngIf="videoHasData"></video> -->
+    </div>
+  </ion-content>

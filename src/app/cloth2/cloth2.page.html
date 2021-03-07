@@ -1,0 +1,85 @@
+<!-- <ion-header no-border>
+  <ion-toolbar>
+    <ion-title class="ion-text-center"></ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<ion-content no-border>
+    <ion-toolbar>
+      <ion-button fill="clear" routerLink=".." routerDirection="back"  slot="start">
+        <img src='../../assets/cloth/right-arrowg.png' >
+      </ion-button>
+      <ion-title class="ion-text-center" >3D Customization</ion-title>
+    </ion-toolbar>
+
+<ion-grid fixed>
+  <ion-row *ngIf="status==1"> 
+    <ion-col size="12" class="ion-text-center" *ngIf="gender=='Boy'">
+      <div *ngIf="selectedUW!=-10" class="Upperwear">
+        <img  src="{{dress?.Upperwear[selectedUW].item_image}}" alt="">
+      </div>
+      
+      <div class="dummy">
+        <img src="../../assets/cloth/MaleDummy.png" alt="">
+      </div>
+      <div *ngIf="selectedLW!=-10" class="Lowerwear" >
+        <img src="{{dress?.Lowerwear[selectedLW].item_image}}" alt="">
+      </div>
+    </ion-col>
+    <ion-col size="12" class="ion-text-center" *ngIf="gender=='Girl'">
+      <div class="dummy">
+        <img src="../../assets/cloth/MaleDummy.png" alt="">
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="status==1">
+     <!-- Upper Wear -->
+     <ion-col size="1" style="align-self: center;" *ngIf="dress?.Upperwear.length>0">
+      <ion-icon (click)="swipePrevious(0)" name="chevron-back-circle-sharp" class="swiper-button-prev"></ion-icon>
+      <!-- <ion-icon name="arrow-dropleft-circle"></ion-icon> -->
+    </ion-col>
+    <ion-col size="10" *ngIf="dress?.Upperwear.length>0">
+      <div class="blur1"></div>
+      <ion-slides mode="ios" #mySlider [options]="slideOpts">
+        <ion-slide *ngFor="let item of dress?.Upperwear">
+          <div class="clothimage">
+            <img src="{{item.item_image}}" alt="">
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <ion-col size="1"  style="align-self: center;" *ngIf="dress?.Upperwear.length>0">
+      <ion-icon (click)="swipeNext(0)" name="chevron-forward-circle-sharp" class="swiper-button-next"></ion-icon>
+    </ion-col>
+    <!-- Lower Wear -->
+    <ion-col size="1" style="align-self: center;" *ngIf="dress?.Lowerwear.length>0">
+      <ion-icon (click)="swipePrevious(1)" name="chevron-back-circle-sharp" class="swiper-button-prev"></ion-icon>
+      <!-- <ion-icon name="arrow-dropleft-circle"></ion-icon> -->
+    </ion-col>
+    <ion-col size="10" *ngIf="dress?.Lowerwear.length>0">
+      <div class="blur2"></div>
+      <ion-slides mode="ios" #mySlider1 [options]="slideOpts1">
+        <ion-slide *ngFor="let item of dress?.Lowerwear">
+          <div class="clothimage">
+            <img src="{{item.item_image}}" alt="">
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <ion-col size="1"  style="align-self: center;" *ngIf="dress?.Lowerwear.length>0">
+      <ion-icon (click)="swipeNext(1)" name="chevron-forward-circle-sharp" class="swiper-button-next"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="status==-1" style="margin-top: 20px;">
+    <ion-col size="12" class="ion-text-center" >
+     <h3  class="nocloth">
+       Sorry No Cloths For This Category!
+     </h3>
+     <div class="sadface">
+      <img src="../../assets/cloth/nodata.png" alt="">
+     </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
